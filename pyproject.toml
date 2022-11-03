@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "letter-dance"
+version = "0.1.0"
+description = ""
+authors = ["Roberto Arista <arista.rob@gmail.com>"]
+readme = "README.md"
+packages = [{include = "letter_dance"}]
+
+[tool.poetry.dependencies]
+python = "^3.7.9"
+drawBot = { git = "https://github.com/typemytype/drawbot.git", branch="master" }
+fontParts = { git = "https://github.com/robotools/fontParts", branch="master" }
+mutatorMath = { git = "https://github.com/LettError/MutatorMath.git", branch="master" }
+
+[tool.poetry.dev-dependencies]
+black = "^22.1.0"
+
+[tool]
+black = { line-length = 120 }
+isort = { profile = "black" }
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
