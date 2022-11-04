@@ -22,7 +22,6 @@ canvas = 800, 800
 fps = 24
 seconds = 6
 frames = seconds * fps if seconds > 0 else 1
-designSpaceDocName = "hello.designspace"
 
 names = ["R", "a", "five"]
 bodySize = 300  # pts
@@ -30,15 +29,15 @@ bodySize = 300  # pts
 fontsFolder = Path("fonts")
 fontToLocation = {
     "x0_y0.ufo": Location(x=0, y=0),
-    "x1000_y0.ufo": Location(x=1000, y=0), 
+    "x1000_y0.ufo": Location(x=1000, y=0),
     "x0_y1000.ufo": Location(x=0, y=1000),
     "x1000_y1000.ufo": Location(x=1000, y=1000),
 }
 
 offset = 250, 1000  # upms
 
-ampX = canvas[0] * 0.6
-ampY = canvas[1] * 0.6
+ampX = 1000 * 0.6
+ampY = 1000 * 0.6
 angFreqX = 2
 angPhaseX = pi / 2
 angFreqY = 1
@@ -78,5 +77,5 @@ if __name__ == "__main__":
             db.translate(instance.width, 0)
 
     suffix = "pdf" if seconds == 0 else "mp4"
-    db.saveImage(f"letterDance.{suffix}")
+    db.saveImage(f"letterDance_2.{suffix}")
     db.endDrawing()
