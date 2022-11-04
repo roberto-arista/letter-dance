@@ -21,7 +21,6 @@ def drawGlyph(glyph):
 canvas = 800, 800
 fps = 24
 seconds = 6
-frames = seconds * fps if seconds > 0 else 1
 
 names = ["R", "a", "five"]
 bodySize = 300  # pts
@@ -35,15 +34,19 @@ fontToLocation = {
 }
 
 offset = 250, 1000  # upms
+upm = 1000
 
-ampX = 1000 * 0.6
-ampY = 1000 * 0.6
+ampX = 0.8  # keep it between 0 and 1
+ampY = 0.8
 angFreqX = 2
 angPhaseX = pi / 2
 angFreqY = 1
 angPhaseY = pi / 3
 
 if __name__ == "__main__":
+    frames = seconds * fps if seconds > 0 else 1
+    ampX = 1000 / 2 * ampX
+    ampY = 1000 / 2 * ampY
 
     mutators = {}
     for eachGlyphName in names:
@@ -54,11 +57,11 @@ if __name__ == "__main__":
         status, mutator = buildMutator(locations)
         mutators[eachGlyphName] = mutator
 
-    scalingFactor = bodySize / fp.OpenFont(fontsFolder / "x0_y0.ufo").info.unitsPerEm  # type: ignore
+    scalingFactor = bodySize / upm
     db.newDrawing()
     for eachFrame in range(frames):
 
-        db.newPage(800, 800)
+        db.newPage(*canvas)
         db.frameDuration(1 / fps)
         db.fill(*BLACK)
         db.rect(0, 0, db.width(), db.height())
@@ -77,5 +80,5 @@ if __name__ == "__main__":
             db.translate(instance.width, 0)
 
     suffix = "pdf" if seconds == 0 else "mp4"
-    db.saveImage(f"letterDance_2.{suffix}")
+    db.saveImage(f"letterDance.{suffix}")
     db.endDrawing()
