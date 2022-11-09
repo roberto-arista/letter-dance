@@ -56,6 +56,8 @@ if __name__ == "__main__":
     frames = seconds * fps if seconds > 0 else 1
     ampX = DESIGN_SPACE_LENGTH / 2 * ampX
     ampY = DESIGN_SPACE_LENGTH / 2 * ampY
+    if is3D:
+        ampZ = DESIGN_SPACE_LENGTH / 2 * ampZ
 
     mutators = {}
     for eachGlyphName in names:
