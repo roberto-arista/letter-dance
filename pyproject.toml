@@ -4,7 +4,6 @@ version = "0.1.0"
 description = ""
 authors = ["Roberto Arista <arista.rob@gmail.com>"]
 readme = "README.md"
-packages = [{include = "letter_dance"}]
 
 [tool.poetry.dependencies]
 python = "^3.7.9"
