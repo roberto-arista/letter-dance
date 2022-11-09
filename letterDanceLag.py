@@ -9,6 +9,7 @@ from mutatorMath.objects.mutator import buildMutator
 # Colors
 BACKGROUND = 0 / 255, 0 / 255, 0 / 255
 TEXT = 255 / 255, 255 / 255, 255 / 255
+DESIGN_SPACE_LENGTH = 1000
 
 # Functions
 def drawGlyph(glyph):
@@ -36,18 +37,25 @@ fontToLocation = {
 offset = 250, 1000  # upms
 upm = 1000
 lag = 20
+is3D = False
 
 ampX = 0.8  # keep it between 0 and 1
 ampY = 0.8
+if is3D:
+    ampZ = 0.8
+
 angFreqX = 2
 angPhaseX = pi / 2
 angFreqY = 1
 angPhaseY = pi / 3
+if is3D:
+    angFreqZ = 2
+    angPhaseZ = pi / 4
 
 if __name__ == "__main__":
     frames = seconds * fps if seconds > 0 else 1
-    ampX = 1000 / 2 * ampX
-    ampY = 1000 / 2 * ampY
+    ampX = DESIGN_SPACE_LENGTH / 2 * ampX
+    ampY = DESIGN_SPACE_LENGTH / 2 * ampY
 
     mutators = {}
     for eachGlyphName in names:
@@ -73,9 +81,14 @@ if __name__ == "__main__":
         db.fill(*TEXT)
         for indexName, eachGlyphName in enumerate(names):
             t = (eachFrame + indexName * lag) % frames * pi * 2 / frames
-            x = db.width() / 2 + ampX * sin(angFreqX * t + angPhaseX)
-            y = db.height() / 2 + ampY * sin(angFreqY * t + angPhaseY)
-            instance = mutators[eachGlyphName].makeInstance(Location(x=x, y=y))
+            x = DESIGN_SPACE_LENGTH / 2 + ampX * sin(angFreqX * t + angPhaseX)
+            y = DESIGN_SPACE_LENGTH / 2 + ampY * sin(angFreqY * t + angPhaseY)
+            loc = Location(x=x, y=y)
+            if is3D:
+                z = DESIGN_SPACE_LENGTH / 2 + ampZ * sin(angFreqZ * t + angPhaseZ)
+                loc = Location(x=x, y=y, z=z)
+
+            instance = mutators[eachGlyphName].makeInstance(loc)
             drawGlyph(instance)
             db.translate(instance.width, 0)
 
