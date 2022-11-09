@@ -8,7 +8,6 @@ from mutatorMath.objects.mutator import buildMutator
 
 # Colors
 BACKGROUND = 0 / 255, 0 / 255, 0 / 255
-TEXT = 255 / 255, 255 / 255, 255 / 255
 DESIGN_SPACE_LENGTH = 1000
 
 # Functions
