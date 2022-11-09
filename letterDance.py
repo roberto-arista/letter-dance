@@ -6,9 +6,9 @@ from drawBot import _drawBotDrawingTool as db
 from mutatorMath.objects.location import Location
 from mutatorMath.objects.mutator import buildMutator
 
-# Constants
-BLACK = 0, 0, 0
-WHITE = 1, 1, 1
+# Colors
+BACKGROUND = 0 / 255, 0 / 255, 0 / 255
+TEXT = 255 / 255, 255 / 255, 255 / 255
 
 # Functions
 def drawGlyph(glyph):
@@ -63,17 +63,17 @@ if __name__ == "__main__":
 
         db.newPage(*canvas)
         db.frameDuration(1 / fps)
-        db.fill(*BLACK)
+        db.fill(*BACKGROUND)
         db.rect(0, 0, db.width(), db.height())
 
-        db.scale(scalingFactor)
+        db.scale(scalingFactor)  # type: ignore
         db.translate(*offset)
 
         t = eachFrame * pi * 2 / frames
         x = db.width() / 2 + ampX * sin(angFreqX * t + angPhaseX)
         y = db.height() / 2 + ampY * sin(angFreqY * t + angPhaseY)
 
-        db.fill(*WHITE)
+        db.fill(*TEXT)
         for eachGlyphName in names:
             instance = mutators[eachGlyphName].makeInstance(Location(x=x, y=y))
             drawGlyph(instance)
